@@ -93,22 +93,12 @@ class Movies extends Component {
             if (rowData.artworkUrl100) {
                 image = <Image
                     source={{uri: rowData.artworkUrl100.replace('100x100bb.jpg', '500x500bb.jpg')}}
-                    style={{
-                        height: 95,
-                        width: 75,
-                        borderRadius: 10,
-                        margin: 20
-                    }}
+                    style={styles.img}
                 />;
             } else {
                 image = <Image
                     source={{uri: rowData.pic}}
-                    style={{
-                        height: 95,
-                        width: 75,
-                        borderRadius: 10,
-                        margin: 20
-                    }}
+                    style={styles.img}
                 />;
             }
         }
@@ -121,16 +111,22 @@ class Movies extends Component {
 
                     {image}
 
-                    <View style={{
-                        flex: 1,
-                        flexDirection: 'column',
-                        justifyContent: 'space-between'
-                    }}>
-                        <Text style={{fontWeight: 'bold', color: 'black'}}>{rowData.trackName}</Text>
-                        <Text>{rowData.releaseDate.split('-')[0]}</Text>
-                        <Text>{rowData.country}</Text>
-                        <Text>{rowData.primaryGenreName}</Text>
-                        <Text>{rowData.artistName}</Text>
+                    <View style={styles.textBlock}>
+                        <Text style={styles.textItemBold}>
+							{rowData.trackName}
+						</Text>
+                        <Text style={styles.textItem}>
+							{rowData.releaseDate.split('-')[0]}
+						</Text>
+                        <Text style={styles.textItem}>
+							{rowData.country}
+						</Text>
+                        <Text style={styles.textItem}>
+							{rowData.primaryGenreName}
+						</Text>
+                        <Text style={styles.textItem}>
+							{rowData.artistName}
+						</Text>
                     </View>
                 </View>
             </TouchableHighlight>
@@ -160,10 +156,9 @@ class Movies extends Component {
             return;
         }
 
-        var items, positionY, recordsCount;
-        recordsCount = this.state.recordsCount;
-        positionY = this.state.positionY;
-        items = this.state.filteredItems.slice(0, recordsCount);
+        var recordsCount = this.state.recordsCount;
+        var positionY = this.state.positionY;
+        var items = this.state.filteredItems.slice(0, recordsCount);
 
         if (event.nativeEvent.contentOffset.y >= positionY - 550) {
             this.setState({
@@ -305,8 +300,20 @@ const styles = StyleSheet.create({
     img: {
         height: 95,
         width: 75,
-        borderRadius: 20,
+        borderRadius: 10,
         margin: 20
+    },    
+	textBlock: {
+		flex: 1,
+		flexDirection: 'column',
+		justifyContent: 'space-between'
+    },	
+	textItemBold: {
+		fontWeight: 'bold', 
+		color: 'black'
+    },	
+	textItem: {
+		color: 'black'
     },
 	container: {
 		flex: 1, 
