@@ -1,18 +1,9 @@
-//'use strict';
-
 import React, {Component} from 'react';
-
 import {
-	AppRegistry,
-	StyleSheet,
-	Text,
-	View,
-	Navigator,
-	TouchableHighlight,
-	TouchableOpacity
+	Navigator
 } from 'react-native';
 
-import ScrollableTabView from 'react-native-scrollable-tab-view';
+import ScrollableTabView, {DefaultTabBar} from 'react-native-scrollable-tab-view';
 
 import Search from '../search/search';
 import SearchResults from '../search/searchResults';
@@ -35,7 +26,9 @@ class AppContainer extends Component {
 	
 	render() {
 		return (
-			<ScrollableTabView>
+			<ScrollableTabView 
+				renderTabBar={() => <DefaultTabBar backgroundColor='white' />}
+			>
 				<MoviesTab tabLabel="Movies" />
 				<SearchTab tabLabel="Search" />
 			</ScrollableTabView>
@@ -69,14 +62,14 @@ class SearchTab extends Component {
 	render() {
 		return (
 	  		<Navigator
-			initialRoute={this.routes[0]}
-			initialRouteStack={this.routes}
-		    renderScene={this.renderScene.bind(this)}
-			style={{padding: 0}}
-		  
-			configureScene={(route, routeStack) =>
-				Navigator.SceneConfigs.PushFromRight}
-		/>
+				initialRoute={this.routes[0]}
+				initialRouteStack={this.routes}
+				renderScene={this.renderScene.bind(this)}
+				style={{padding: 0}}
+			  
+				configureScene={(route, routeStack) =>
+					Navigator.SceneConfigs.PushFromRight}
+			/>
 		)
 	}
 }
@@ -102,31 +95,16 @@ class MoviesTab extends Component {
 	render() {
 		return (
 	  		<Navigator
-			initialRoute={this.routes[0]}
-			initialRouteStack={this.routes}
-		    renderScene={this.renderScene.bind(this)}
-			style={{padding: 0}}
-		  
-			configureScene={(route, routeStack) =>
-				Navigator.SceneConfigs.PushFromRight}
-		/>
+				initialRoute={this.routes[0]}
+				initialRouteStack={this.routes}
+				renderScene={this.renderScene.bind(this)}
+				style={{padding: 0}}
+			  
+				configureScene={(route, routeStack) =>
+					Navigator.SceneConfigs.PushFromRight}
+			/>
 		)
 	}
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-    color: 'white',
-  },
-});
-
-module.exports = AppContainer;
+export default AppContainer;

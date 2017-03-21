@@ -1,8 +1,7 @@
-//'use strict';
+'use strict';
 
 import React, {Component} from 'react';
 import {
-    AppRegistry,
     StyleSheet,
     Text,
     View,
@@ -15,8 +14,6 @@ import {
     AsyncStorage,
     Alert
 } from 'react-native';
-
-//import MoviesDetails from './moviesDetails';
 
 class Movies extends Component {
     constructor(props) {
@@ -99,7 +96,7 @@ class Movies extends Component {
                     style={{
                         height: 95,
                         width: 75,
-                        borderRadius: 20,
+                        borderRadius: 10,
                         margin: 20
                     }}
                 />;
@@ -109,7 +106,7 @@ class Movies extends Component {
                     style={{
                         height: 95,
                         width: 75,
-                        borderRadius: 20,
+                        borderRadius: 10,
                         margin: 20
                     }}
                 />;
@@ -181,8 +178,9 @@ class Movies extends Component {
         if (this.state.responseData == undefined) {
             return;
         }
+		
         var arr = [].concat(this.state.responseData);
-        var items = arr.filter((el) => el.trackName.toLowerCase().indexOf(text.toLowerCase()) >= 0);
+        var items = arr.filter((el) => el.trackName.toLowerCase().indexOf(text.toLowerCase()) != -1);
         this.setState({
             dataSource: this.state.dataSource.cloneWithRows(items),
             resultsCount: items.length,
@@ -222,23 +220,14 @@ class Movies extends Component {
         }
 
         return (
-            <View style={{flex: 1, justifyContent: 'center'}}>
-				<View style={{
-						flexDirection: 'row',
-						justifyContent: 'space-between'
-					}}>
+            <View style={styles.container}>
+				<View style={styles.header}>
 					<View>
 						<TouchableHighlight
 							onPress={()=> this.refreshDataAndroid()}
 							underlayColor='#ddd'
 						>
-							<Text style={{
-								fontSize: 16,
-								textAlign: 'center',
-								margin: 14,
-								fontWeight: 'bold',
-								color: 'darkblue'
-							}}>
+							<Text style={styles.textSmall}>
 								Reload
 							</Text>
 						</TouchableHighlight>	
@@ -246,55 +235,34 @@ class Movies extends Component {
 					<View>
 						<TouchableHighlight
 							underlayColor='#ddd'
+							onPress={()=> this.goBack()}
 						>
-							<Text style={{
-								fontSize: 20,
-								textAlign: 'center',
-								margin: 10,
-								marginRight: 50,
-								fontWeight: 'bold',
-								color: 'black'
-							}}>
+							<Text style={styles.textLarge}>
 								Movies
 							</Text>
 						</TouchableHighlight>	
 					</View>						
 					<View>
 						<TouchableHighlight
-							//onPress={()=> this.addUser()}
 							underlayColor='#ddd'
 						>
-							<Text style={{
-								fontSize: 16,
-								textAlign: 'center',
-								margin: 14,
-								fontWeight: 'bold',
-								color: 'black'
-							}}>
-							
+							<Text style={styles.textSmall}>
 							</Text>
 						</TouchableHighlight>	
 					</View>
 				</View>
 			
-                <View style={{marginTop: 0}}>
-                    <TextInput style={{
-                        height: 45,
-						marginTop: 4,
-                        padding: 5,
-                        backgroundColor: 'whitesmoke',
-                        borderWidth: 3,
-                        borderColor: 'lightgray',
-                        borderRadius: 0,
-                    }}
-                               onChangeText={this.onChangeText.bind(this)}
-                               value={this.state.searchQuery}
-                               placeholder="Search here">
-                    </TextInput>
-
-                    {errorCtrl}
-
-                </View>
+                <View>
+                    <TextInput
+						underlineColorAndroid='rgba(0,0,0,0)'
+						onChangeText={this.onChangeText.bind(this)}
+						style={styles.textInput}
+						value={this.state.searchQuery}
+						placeholder="Search here">
+                    </TextInput>    			
+				</View>
+				
+				{errorCtrl}
 
                 {loader}
 
@@ -308,17 +276,15 @@ class Movies extends Component {
                     />
                 </ScrollView>
 
-                <View style={{marginBottom: 0}}>
-                    <Text style={styles.countFooter}>
-                        {this.state.resultsCount} entries were found.
-                    </Text>
-                </View>
-
+				<View>
+					<Text style={styles.countFooter}>
+						Records: {this.state.resultsCount} 
+					</Text>
+				</View>
             </View>
         )
     }
 }
-
 
 const styles = StyleSheet.create({
     imgsList: {
@@ -336,19 +302,74 @@ const styles = StyleSheet.create({
         padding: 15,
         backgroundColor: '#F5FCFF',
     },
-    countFooter: {
-        fontSize: 16,
-        textAlign: 'center',
-        padding: 10,
-        borderColor: '#D7D7D7',
-        backgroundColor: 'lightgray',
-		color: 'black'
-    },
     img: {
         height: 95,
         width: 75,
         borderRadius: 20,
         margin: 20
+    },
+	container: {
+		flex: 1, 
+		justifyContent: 'center', 
+		backgroundColor: 'white'
+	},		
+	header: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		backgroundColor: '#48BBEC',
+		borderWidth: 0,
+		borderColor: 'whitesmoke'
+	},	
+	textSmall: {
+		fontSize: 16,
+		textAlign: 'center',
+		margin: 14,
+		fontWeight: 'bold',
+		color: 'white'
+	},		
+	textLarge: {
+		fontSize: 20,
+		textAlign: 'center',
+		margin: 10,
+		marginRight: 60,
+		fontWeight: 'bold',
+		color: 'white'
+	},		
+	textInput: {
+		height: 45,
+		marginTop: 0,
+		padding: 5,
+		backgroundColor: 'white',
+		borderWidth: 3,
+		borderColor: 'lightgray',
+		borderRadius: 0
+	},		
+	row: {
+		flex: 1,
+		flexDirection: 'row',
+		padding: 20,
+		alignItems: 'center',
+		borderColor: '#D7D7D7',
+		borderBottomWidth: 1,
+		backgroundColor: '#fff'
+	},		
+	rowText: {
+		backgroundColor: '#fff', 
+		color: 'black', 
+		fontWeight: 'bold'
+	},	
+    countFooter: {
+        fontSize: 16,
+        textAlign: 'center',
+        padding: 10,
+        borderColor: '#D7D7D7',
+        backgroundColor: '#48BBEC',
+		color: 'white',
+		fontWeight: 'bold'
+    },
+    loader: {
+		justifyContent: 'center',
+		height: 100
     },
     error: {
         color: 'red',

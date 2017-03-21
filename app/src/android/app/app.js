@@ -2,18 +2,6 @@
 
 import React, {Component} from 'react';
 import {
-    AppRegistry,
-    StyleSheet,
-    Text,
-    View,
-    Image,
-    TouchableHighlight,
-    ListView,
-    ScrollView,
-    ActivityIndicatorIOS,
-    TabBarIOS,
-    NavigatorIOS,
-    TextInput,
 	BackAndroid
 } from 'react-native';
 
@@ -37,7 +25,6 @@ class App extends Component {
         return (
             <AppContainer />
         )
-
     }
 }
 
