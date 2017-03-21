@@ -1,0 +1,17 @@
+1.
+C:\Program Files\Java\jdk1.8.0_111\bin
+keytool -genkey -v -keystore my-release-key.keystore -alias RN-Movies -keyalg RSA -keysize 2048 -validity 10000
+
+2.
+Move my-release-key.keystore -> android/app
+
+3.
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore app-release-unsigned.apk RN-Movies
+
+4.
+zipalign -v 4 app-release-unsigned.apk rn-movies.apk
+
+RN-Movies.
+It's Database of your favorite movies OFF-Line.
+You needn't Internet.
+Enjoy it.
