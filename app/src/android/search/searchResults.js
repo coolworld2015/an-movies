@@ -2,7 +2,6 @@
 
 import React, {Component} from 'react';
 import {
-    AppRegistry,
     StyleSheet,
     Text,
     View,
@@ -11,13 +10,9 @@ import {
     ListView,
     ScrollView,
     ActivityIndicator,
-    TabBarIOS,
-    NavigatorIOS,
     TextInput,
 	BackAndroid
 } from 'react-native';
-
-import SearchDetails from './searchDetails';
 
 class SearchResults extends Component {
     constructor(props) {
@@ -202,78 +197,48 @@ class SearchResults extends Component {
         }
 
         return (
-            <View style={{flex: 1, justifyContent: 'center'}}>
-							<View style={{
-						flexDirection: 'row',
-						justifyContent: 'space-between'
-					}}>
+            <View style={styles.container}>
+				<View style={styles.header}>
 					<View>
 						<TouchableHighlight
 							onPress={()=> this.goBack()}
 							underlayColor='#ddd'
 						>
-							<Text style={{
-								fontSize: 16,
-								textAlign: 'center',
-								margin: 14,
-								fontWeight: 'bold',
-								color: 'darkblue'
-							}}>
-								 Back
+							<Text style={styles.textSmall}>
+								Back
 							</Text>
 						</TouchableHighlight>	
 					</View>
-					<View>
+					<View style={styles.itemWrap}>
 						<TouchableHighlight
 							underlayColor='#ddd'
 						>
-							<Text style={{
-								fontSize: 20,
-								textAlign: 'center',
-								margin: 10,
-								fontWeight: 'bold',
-								color: 'black'
-							}}>
+							<Text style={styles.textLarge}>
 								{this.state.searchQueryHttp}
 							</Text>
 						</TouchableHighlight>	
 					</View>						
 					<View>
 						<TouchableHighlight
-							onPress={()=> this.goBack()}
 							underlayColor='#ddd'
 						>
-							<Text style={{
-								fontSize: 16,
-								textAlign: 'center',
-								margin: 14,
-								fontWeight: 'bold',
-								color: 'darkblue'
-							}}>
-								Done 
+							<Text style={styles.textSmall}>
 							</Text>
 						</TouchableHighlight>	
 					</View>
 				</View>
 				
-                <View style={{marginTop: 0}}>
-                    <TextInput style={{
-                        height: 45,
-                        marginTop: 4,
-                        padding: 5,
-                        backgroundColor: 'whitesmoke',
-                        borderWidth: 3,
-                        borderColor: 'lightgray',
-                        borderRadius: 0,
-                    }}
-                               onChangeText={this.onChangeText.bind(this)}
-                               value={this.state.searchQuery}
-                               placeholder="Search here">
-                    </TextInput>
-
-                    {errorCtrl}
-
-                </View>
+                <View>
+                    <TextInput
+						underlineColorAndroid='rgba(0,0,0,0)'
+						onChangeText={this.onChangeText.bind(this)}
+						style={styles.textInput}
+						value={this.state.searchQuery}
+						placeholder="Search here">
+                    </TextInput>    			
+				</View>
+				
+				{errorCtrl}
 
                 {loader}
 
@@ -287,17 +252,15 @@ class SearchResults extends Component {
                     />
                 </ScrollView>
 
-                <View style={{marginBottom: 0}}>
-                    <Text style={styles.countFooter}>
-                        {this.state.resultsCount} entries were found.
-                    </Text>
-                </View>
-
+				<View>
+					<Text style={styles.countFooter}>
+						Records: {this.state.resultsCount} 
+					</Text>
+				</View>
             </View>
         )
     }
 }
-
 
 const styles = StyleSheet.create({
     imgsList: {
@@ -315,19 +278,91 @@ const styles = StyleSheet.create({
         padding: 15,
         backgroundColor: '#F5FCFF',
     },
+    img: {
+        height: 95,
+        width: 75,
+        borderRadius: 10,
+        margin: 20
+    },    
+	textBlock: {
+		flex: 1,
+		flexDirection: 'column',
+		justifyContent: 'space-between'
+    },	
+	textItemBold: {
+		fontWeight: 'bold', 
+		color: 'black'
+    },	
+	textItem: {
+		color: 'black'
+    },
+	container: {
+		flex: 1, 
+		justifyContent: 'center', 
+		backgroundColor: 'white'
+	},		
+	header: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		backgroundColor: '#48BBEC',
+		borderWidth: 0,
+		borderColor: 'whitesmoke'
+	},	
+	textSmall: {
+		fontSize: 16,
+		textAlign: 'center',
+		margin: 14,
+		fontWeight: 'bold',
+		color: 'white'
+	},		
+	textLarge: {
+		fontSize: 20,
+		textAlign: 'center',
+		margin: 10,
+		marginRight: 60,
+		fontWeight: 'bold',
+		color: 'white'
+	},		
+	textInput: {
+		height: 45,
+		marginTop: 0,
+		padding: 5,
+		backgroundColor: 'white',
+		borderWidth: 3,
+		borderColor: 'lightgray',
+		borderRadius: 0
+	},
+	itemWrap: {
+		flex: 1,
+		flexDirection: 'column', 
+		flexWrap: 'wrap'
+    },	
+	row: {
+		flex: 1,
+		flexDirection: 'row',
+		padding: 20,
+		alignItems: 'center',
+		borderColor: '#D7D7D7',
+		borderBottomWidth: 1,
+		backgroundColor: '#fff'
+	},		
+	rowText: {
+		backgroundColor: '#fff', 
+		color: 'black', 
+		fontWeight: 'bold'
+	},	
     countFooter: {
         fontSize: 16,
         textAlign: 'center',
         padding: 10,
         borderColor: '#D7D7D7',
-        backgroundColor: 'lightgray',
-		color: 'black'
+        backgroundColor: '#48BBEC',
+		color: 'white',
+		fontWeight: 'bold'
     },
-    img: {
-        height: 95,
-        width: 75,
-        borderRadius: 20,
-        margin: 20
+    loader: {
+		justifyContent: 'center',
+		height: 100
     },
     error: {
         color: 'red',

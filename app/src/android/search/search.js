@@ -2,23 +2,16 @@
 
 import React, {Component} from 'react';
 import {
-    AppRegistry,
     StyleSheet,
     Text,
     View,
-    Image,
     TouchableHighlight,
     ListView,
     ScrollView,
     ActivityIndicator,
-    TabBarIOS,
-    NavigatorIOS,
     TextInput,
     Switch
 } from 'react-native';
-
-//import SearchResults from './searchResults';
-//import SearchIMDB from './searchIMDB';
 
 class Search extends Component {
     constructor(props) {
@@ -48,7 +41,8 @@ class Search extends Component {
     }
 	
     onSearchPressed() {
-        if (this.state.searchQuery == undefined) {
+        if (this.state.searchQuery == undefined ||
+			this.state.searchQuery == '') {
             this.setState({
                 invalidValue: true
             });
@@ -104,34 +98,21 @@ class Search extends Component {
                     <TouchableHighlight
                         onPress={this.clearSearch.bind(this)}
                         style={styles.button}>
-                        <Text style={styles.buttonText}>Search movies</Text>
+                        <Text style={styles.buttonText}>
+							Search movies
+						</Text>
                     </TouchableHighlight>
 
-                    <View style={{
-                        height: 50,
-                        marginTop: 10,
-                        padding: 10,
-                        borderWidth: 1,
-                        borderColor: '#48BBEC',
-                        alignSelf: 'stretch',
-                        flex: 1,
-                        flexDirection: 'row'
-                    }}>
-                        <View
-                            style={{
-                                marginTop: 3,
-                                flex: 1
-                            }}>
-                            <Text style={{
-                                fontSize: 18,
-                            }}>
+					<View style={styles.switchBlock}>
+                        <View style={styles.switchItem}>
+                            <Text style={styles.textItem}>
                                 {this.state.textSwitchBase}
                             </Text>
                         </View>
 
                         <View
                             style={{
-                                marginTop: -1
+                                marginTop: 0
                             }}>
                             <Switch
                                 onValueChange={(value) => {
@@ -145,31 +126,16 @@ class Search extends Component {
                         </View>
                     </View>
 
-                    <View style={{
-                        height: 50,
-                        marginTop: 10,
-                        padding: 10,
-                        borderWidth: 1,
-                        borderColor: '#48BBEC',
-                        alignSelf: 'stretch',
-                        flex: 1,
-                        flexDirection: 'row'
-                    }}>
-                        <View
-                            style={{
-                                marginTop: 3,
-                                flex: 1
-                            }}>
-                            <Text style={{
-                                fontSize: 18,
-                            }}>
+                    <View style={styles.switchBlock}>
+                        <View style={styles.switchItem}>
+                            <Text style={styles.textItem}>
                                 Search by title
                             </Text>
                         </View>
 
                         <View
                             style={{
-                                marginTop: -1
+                                marginTop: 0
                             }}>
                             <Switch
                                 onValueChange={(value) => this.setState({
@@ -181,12 +147,13 @@ class Search extends Component {
                     </View>
 
                     <TextInput
+						underlineColorAndroid='rgba(0,0,0,0)'
                         onChangeText={(text)=> this.setState({
                             searchQuery: text,
                             invalidValue: false
                         })}
                         value={this.state.searchQuery}
-                        style={styles.loginInput}
+                        style={styles.textInput}
                         placeholder="Search by title">
                     </TextInput>
 
@@ -220,27 +187,46 @@ const styles = StyleSheet.create({
 		backgroundColor: 'white',
 		paddingBottom: 155
     },
-    loginInput1: {
+    textInput: {
         height: 50,
         marginTop: 10,
         padding: 4,
         fontSize: 18,
         borderWidth: 1,
         borderColor: '#48BBEC',
-        borderRadius: 0,
-        color: 'gray'
-    },
-    loginInput: {
-        height: 50,
-        marginTop: 10,
-        padding: 4,
-        fontSize: 18,
-        borderWidth: 1,
-        borderColor: '#48BBEC',
-        borderRadius: 0,
+        borderRadius: 5,
         color: 'black',
         alignSelf: 'stretch'
     },
+	switchBlock: {
+		height: 50,
+		marginTop: 10,
+		padding: 10,
+		borderWidth: 1,
+		borderRadius: 5,
+		borderColor: '#48BBEC',
+		alignSelf: 'stretch',
+		flex: 1,
+		flexDirection: 'row'
+	},
+	switchItem: {
+		marginTop: 3,
+		flex: 1
+	},		
+	textItem: {
+		fontSize: 18
+	},		
+	inputBlock: {
+		height: 50,
+		marginTop: 10,
+		borderWidth: 1,
+		borderColor: '#48BBEC',
+		flex: 1,
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		borderRadius: 5,
+		paddingLeft: 6
+	},		
     button: {
         height: 50,
         backgroundColor: '#48BBEC',
@@ -253,7 +239,8 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: '#fff',
-        fontSize: 24
+        fontSize: 24,
+		fontWeight: 'bold'
     },
     loader: {
         marginTop: 20

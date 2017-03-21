@@ -2,7 +2,6 @@
 
 import React, {Component} from 'react';
 import {
-    AppRegistry,
     StyleSheet,
     Text,
     View,
@@ -11,8 +10,6 @@ import {
     ListView,
     ScrollView,
     ActivityIndicator,
-    TabBarIOS,
-    NavigatorIOS,
     TextInput,
     AsyncStorage,
     Alert,
@@ -100,39 +97,23 @@ class SearchDetails extends Component {
 		}
 		
         return (
-			<View style={{flex: 1, justifyContent: 'center'}}>
-				<View style={{
-					flexDirection: 'row',
-					justifyContent: 'space-between'
-				}}>
+            <View style={styles.container}>
+				<View style={styles.header}>
 					<View>
 						<TouchableHighlight
 							onPress={()=> this.goBack()}
 							underlayColor='#ddd'
 						>
-							<Text style={{
-								fontSize: 16,
-								textAlign: 'center',
-								margin: 14,
-								fontWeight: 'bold',
-								color: 'darkblue'
-							}}>
-								Back 
+							<Text style={styles.textSmall}>
+								Back
 							</Text>
 						</TouchableHighlight>	
 					</View>
-					<View style={{flex:1,flexDirection:'column', flexWrap:'wrap'}}>
+					<View style={styles.itemWrap}>
 						<TouchableHighlight
 							underlayColor='#ddd'
 						>
-							<Text style={{
-								fontSize: 20,
-								textAlign: 'center',
-								margin: 10,
-								marginRight: 40,
-								fontWeight: 'bold',
-								color: 'black'
-							}}>
+							<Text style={styles.textLarge}>
 								{this.state.pushEvent.trackName}
 							</Text>
 						</TouchableHighlight>	
@@ -142,14 +123,8 @@ class SearchDetails extends Component {
 							onPress={()=> this.localStorageInsert()}
 							underlayColor='#ddd'
 						>
-							<Text style={{
-								fontSize: 16,
-								textAlign: 'center',
-								margin: 14,
-								fontWeight: 'bold',
-								color: 'darkblue'
-							}}>
-								Add 
+							<Text style={styles.textSmall}>
+								Add
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -169,39 +144,36 @@ class SearchDetails extends Component {
 						{image}
 					</View>
 					
-						<Text style={styles.welcome1}>
+						<Text style={styles.itemTextBold}>
 							{this.state.pushEvent.trackName}
 						</Text>
 
-						<Text style={styles.welcome}>
+						<Text style={styles.itemTextBold}>
 							{this.state.pushEvent.releaseDate.split('-')[0]}
 						</Text>
 
-						<Text style={styles.welcome}>
+						<Text style={styles.itemTextBold}>
 							{this.state.pushEvent.country}
 						</Text>
 
-						<Text style={styles.welcome}>
+						<Text style={styles.itemTextBold}>
 							{this.state.pushEvent.primaryGenreName}
 						</Text>
 
-						<Text style={styles.welcome}>
+						<Text style={styles.itemTextBold}>
 							{this.state.pushEvent.artistName}
 						</Text>
 
-						<Text style={{
-							fontSize: 16,
-							padding: 20,
-							textAlign: 'center',
-							color: 'black'
-						}}>
+						<Text style={styles.itemText}>
 							{this.state.pushEvent.longDescription}
 						</Text>
 						
 						<TouchableHighlight
 							onPress={()=> this.localStorageInsert()}
 							style={styles.button}>
-							<Text style={styles.buttonText}>Add to favorites</Text>
+							<Text style={styles.buttonText}>
+								Add to favorites
+							</Text>
 						</TouchableHighlight>
 						
 					</View>
@@ -212,54 +184,60 @@ class SearchDetails extends Component {
 }
 
 const styles = StyleSheet.create({
-    AppContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+	container: {
+		flex: 1, 
+		justifyContent: 'center', 
+		backgroundColor: 'white'
+	},		
+	header: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		backgroundColor: '#48BBEC',
+		borderWidth: 0,
+		borderColor: 'whitesmoke'
+	},	
+	textSmall: {
+		fontSize: 16,
+		textAlign: 'center',
+		margin: 14,
+		fontWeight: 'bold',
+		color: 'white'
+	},		
+	textLarge: {
+		fontSize: 20,
+		textAlign: 'center',
+		margin: 10,
+		marginRight: 20,
+		fontWeight: 'bold',
+		color: 'white'
+	},	
+    form: {
+		flex: 1,
+		padding: 10,
+		justifyContent: 'flex-start',
+		paddingBottom: 130,
+		backgroundColor: 'white'
     },
-    welcome1: {
+ 	itemWrap: {
+		flex: 1,
+		flexDirection: 'column', 
+		flexWrap: 'wrap'
+    },	
+    itemTextBold: {
         fontSize: 18,
         textAlign: 'center',
-        margin: 10,
+        margin: 5,
         fontWeight: 'bold',
 		color: 'black'
-    },
-    welcome: {
-        fontSize: 18,
-        textAlign: 'center',
-        margin: 10,
+    },  
+	itemText: {
+		fontSize: 18,
+		padding: 20,
+		textAlign: 'center',
 		color: 'black'
-    },
-    container: {
-        backgroundColor: '#F5FCFF',
-        paddingTop: 40,
-        padding: 10,
-        alignItems: 'center',
-        flex: 1
-    },
-    logo: {
-        width: 66,
-        height: 65
-    },
-    heading: {
-        fontSize: 30,
-        margin: 10,
-        marginBottom: 20
-    },
-    loginInput: {
-        height: 50,
-        marginTop: 10,
-        padding: 4,
-        fontSize: 18,
-        borderWidth: 1,
-        borderColor: '#48BBEC',
-        borderRadius: 0,
-        color: '#48BBEC'
     },
     button: {
         height: 50,
-        margin: 10,
         backgroundColor: '#48BBEC',
         borderColor: '#48BBEC',
         alignSelf: 'stretch',
@@ -270,14 +248,16 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: '#fff',
-        fontSize: 24
+        fontSize: 20,
+		fontWeight: 'bold'
     },
     loader: {
         marginTop: 20
     },
     error: {
         color: 'red',
-        paddingTop: 10
+        paddingTop: 10,
+        textAlign: 'center'
     }
 });
 
