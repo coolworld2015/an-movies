@@ -1,17 +1,23 @@
 1.
 C:\Program Files\Java\jdk1.8.0_111\bin
-keytool -genkey -v -keystore my-release-key.keystore -alias RN-Movies -keyalg RSA -keysize 2048 -validity 10000
+keytool -genkey -v -keystore my-release-key.keystore -alias AN-Movies -keyalg RSA -keysize 2048 -validity 10000
 
 2.
 Move my-release-key.keystore -> android/app
 
 3.
-jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore app-release-unsigned.apk RN-Movies
+react-native bundle --dev false --platform android --entry-file index.android.js --bundle-output ./android/app/build/intermediates/assets/debug/index.android.bundle --assets-dest ./android/app/build/intermediates/res/merged/debug
 
 4.
-zipalign -v 4 app-release-unsigned.apk rn-movies.apk
+cd android -> gradlew assembleRelease
 
-RN-Movies.
+5.
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore app-release-unsigned.apk AN-Movies
+
+6.
+zipalign -v 4 app-release-unsigned.apk an-movies.apk
+
+AN-Movies.
 It's Database of your favorite movies OFF-Line.
 You needn't Internet.
 Enjoy it.

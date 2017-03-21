@@ -190,6 +190,7 @@ const styles = StyleSheet.create({
     textInput: {
         height: 50,
         marginTop: 10,
+		paddingLeft: 10,
         padding: 4,
         fontSize: 18,
         borderWidth: 1,

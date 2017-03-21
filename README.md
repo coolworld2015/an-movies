@@ -25,7 +25,7 @@ APK -> react-native bundle --dev false --platform android --entry-file index.and
 -------------------------------------------------------------------------------------------------
 APK -> cd android -> gradlew assembleDebug
 -------------------------------------------------------------------------------------------------
-RELEASE -> cd android -> assembleRelease -> \android\app\build\outputs\apk
+RELEASE -> cd android -> gradlew assembleRelease -> \android\app\build\outputs\apk
 -------------------------------------------------------------------------------------------------
 PIC -> /android/app/src/main/res/mipmap
 -------------------------------------------------------------------------------------------------
