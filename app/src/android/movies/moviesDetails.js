@@ -2,7 +2,6 @@
 
 import React, {Component} from 'react';
 import {
-    AppRegistry,
     StyleSheet,
     Text,
     View,
@@ -11,13 +10,9 @@ import {
     ListView,
     ScrollView,
     ActivityIndicator,
-    TabBarIOS,
-    NavigatorIOS,
-    TextInput,
     AsyncStorage,
     Alert,
-	BackAndroid,
-	UIExplorerBlock 
+	BackAndroid
 } from 'react-native';
 
 class MoviesDetails extends Component {

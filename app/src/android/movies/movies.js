@@ -88,7 +88,7 @@ class Movies extends Component {
     }
 
     renderRow(rowData) {
-        var image = <View />;
+        var image;
         if (rowData) {
             if (rowData.artworkUrl100) {
                 image = <Image
@@ -265,7 +265,6 @@ class Movies extends Component {
                     onScroll={this.refreshData.bind(this)} scrollEventThrottle={16}>
                     <ListView
 						enableEmptySections={true}
-                        style={{marginTop: 0, marginBottom: 0}}
                         dataSource={this.state.dataSource}
                         renderRow={this.renderRow.bind(this)}
                     />
