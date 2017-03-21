@@ -43,7 +43,6 @@ class SearchResults extends Component {
 				positionY: 0
 			}
         };
-
         this.getMovies();
     }
 
@@ -76,16 +75,6 @@ class SearchResults extends Component {
                 });
             });
     }
-
-    pressRow1(rowData) {
-        this.props.navigator.push({
-            title: rowData.trackName,
-            component: SearchDetails,
-            passProps: {
-                pushEvent: rowData
-            }
-        });
-    }
 	
     pressRow(rowData) {
 		this.props.navigator.push({
@@ -105,16 +94,22 @@ class SearchResults extends Component {
                         source={{uri: rowData.artworkUrl100.replace('100x100bb.jpg', '500x500bb.jpg')}}
                         style={styles.img}
                     />
-                    <View style={{
-                        flex: 1,
-                        flexDirection: 'column',
-                        justifyContent: 'space-between'
-                    }}>
-                        <Text style={{fontWeight: 'bold', color: 'black'}}>{rowData.trackName}</Text>
-                        <Text>{rowData.releaseDate.split('-')[0]}</Text>
-                        <Text>{rowData.country}</Text>
-                        <Text>{rowData.primaryGenreName}</Text>
-                        <Text>{rowData.artistName}</Text>
+                    <View style={styles.textBlock}>
+                        <Text style={styles.textItemBold}>
+							{rowData.trackName}
+						</Text>
+                        <Text style={styles.textItem}>
+							{rowData.releaseDate.split('-')[0]}
+						</Text>
+                        <Text style={styles.textItem}>
+							{rowData.country}
+						</Text>
+                        <Text style={styles.textItem}>
+							{rowData.primaryGenreName}
+						</Text>
+                        <Text style={styles.textItem}>
+							{rowData.artistName}
+						</Text>
                     </View>
                 </View>
             </TouchableHighlight>
@@ -144,10 +139,9 @@ class SearchResults extends Component {
             return;
         }
 
-        var items, positionY, recordsCount;
-        recordsCount = this.state.recordsCount;
-        positionY = this.state.positionY;
-        items = this.state.filteredItems.slice(0, recordsCount);
+        var recordsCount = this.state.recordsCount;
+        var positionY = this.state.positionY;
+        var items = this.state.filteredItems.slice(0, recordsCount);
 
         if (event.nativeEvent.contentOffset.y >= positionY - 550) {
             this.setState({
