@@ -49,6 +49,13 @@ class Movies extends Component {
     }
 
     getFavoritesMovies() {
+		this.setState({
+            showProgress: true,
+            resultsCount: 0,
+            recordsCount: 5,
+            positionY: 0
+        });
+		
         AsyncStorage.getItem('rn-movies.movies')
             .then(req => JSON.parse(req))
             .then(json => {
@@ -230,7 +237,6 @@ class Movies extends Component {
 					<View>
 						<TouchableHighlight
 							underlayColor='#ddd'
-							onPress={()=> this.goBack()}
 						>
 							<Text style={styles.textLarge}>
 								Movies
