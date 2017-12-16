@@ -13,6 +13,8 @@ import {
     Switch
 } from 'react-native';
 
+import {AdMobBanner} from 'react-native-admob';
+
 class Search extends Component {
     constructor(props) {
         super(props);
@@ -172,12 +174,20 @@ class Search extends Component {
                         size="large"
                         style={styles.loader}
                     />
+					<View style={{marginTop:50}}>
+						<AdMobBanner adUnitID="ca-app-pub-4884500146569199/5596319463"/>
+					</View>
                 </View>
             </ScrollView>
         )
     }
 }
-
+/*
+<AdMobBanner adUnitID="ca-app-pub-4884500146569199/5596319463"/>
+<Text>
+	Banner
+</Text>
+*/
 const styles = StyleSheet.create({
     container: {
         padding: 10,

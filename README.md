@@ -33,3 +33,4 @@ CONFIG -> android/app ->build.gradle /applicationId + versionName
 -------------------------------------------------------------------------------------------------
 NAME -> android\app\src\main\res\values\strings
 -------------------------------------------------------------------------------------------------
+https://www.npmjs.com/package/react-native-admob
