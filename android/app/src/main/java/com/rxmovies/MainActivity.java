@@ -1,4 +1,4 @@
-package com.anmovies;
+package com.rxmovies;
 
 import com.facebook.react.ReactActivity;
 

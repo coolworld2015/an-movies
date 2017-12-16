@@ -12,12 +12,15 @@ react-native bundle --dev false --platform android --entry-file index.android.js
 cd android -> gradlew assembleRelease
 
 5.
-jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore app-release-unsigned.apk AN-Movies
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore app-release-unsigned.apk RN-Movies
 
 6.
-zipalign -v 4 app-release-unsigned.apk an-movies.apk
+zipalign -v 4 app-release-unsigned.apk rn-movies.apk
 
 AN-Movies.
 It's Database of your favorite movies OFF-Line.
 You needn't Internet.
 Enjoy it.
+
+
+react-native-rename "anmovies" -b com.rxmovies

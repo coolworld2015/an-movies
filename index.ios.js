@@ -50,4 +50,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('anmovies', () => anmovies);
+AppRegistry.registerComponent('rxmovies', () => rxmovies);

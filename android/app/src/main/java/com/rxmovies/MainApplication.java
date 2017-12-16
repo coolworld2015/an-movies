@@ -1,4 +1,4 @@
-package com.anmovies;
+package com.rxmovies;
 
 import android.app.Application;
 
